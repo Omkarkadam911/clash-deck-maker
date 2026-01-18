@@ -1,0 +1,976 @@
+{
+  "cards": [
+    {
+      "id": "26000000",
+      "name": "Knight",
+      "elixir": 3,
+      "rarity": "common",
+      "type": "troop",
+      "arena": 0,
+      "roles": ["tank", "support"]
+    },
+    {
+      "id": "26000001",
+      "name": "Archers",
+      "elixir": 3,
+      "rarity": "common",
+      "type": "troop",
+      "arena": 0,
+      "roles": ["air_targeting", "support"]
+    },
+    {
+      "id": "26000002",
+      "name": "Goblins",
+      "elixir": 2,
+      "rarity": "common",
+      "type": "troop",
+      "arena": 1,
+      "roles": ["cycle", "swarm"]
+    },
+    {
+      "id": "26000003",
+      "name": "Giant",
+      "elixir": 5,
+      "rarity": "rare",
+      "type": "troop",
+      "arena": 0,
+      "roles": ["win_condition", "tank"]
+    },
+    {
+      "id": "26000004",
+      "name": "P.E.K.K.A",
+      "elixir": 7,
+      "rarity": "epic",
+      "type": "troop",
+      "arena": 4,
+      "roles": ["tank_killer", "tank"]
+    },
+    {
+      "id": "26000005",
+      "name": "Minions",
+      "elixir": 3,
+      "rarity": "common",
+      "type": "troop",
+      "arena": 0,
+      "roles": ["air_targeting", "swarm"]
+    },
+    {
+      "id": "26000006",
+      "name": "Balloon",
+      "elixir": 5,
+      "rarity": "epic",
+      "type": "troop",
+      "arena": 2,
+      "roles": ["win_condition"]
+    },
+    {
+      "id": "26000007",
+      "name": "Witch",
+      "elixir": 5,
+      "rarity": "epic",
+      "type": "troop",
+      "arena": 0,
+      "roles": ["air_targeting", "support"]
+    },
+    {
+      "id": "26000008",
+      "name": "Barbarians",
+      "elixir": 5,
+      "rarity": "common",
+      "type": "troop",
+      "arena": 3,
+      "roles": ["tank_killer", "swarm"]
+    },
+    {
+      "id": "26000009",
+      "name": "Golem",
+      "elixir": 8,
+      "rarity": "epic",
+      "type": "troop",
+      "arena": 6,
+      "roles": ["win_condition", "tank"]
+    },
+    {
+      "id": "26000010",
+      "name": "Skeletons",
+      "elixir": 1,
+      "rarity": "common",
+      "type": "troop",
+      "arena": 0,
+      "roles": ["cycle", "swarm"]
+    },
+    {
+      "id": "26000011",
+      "name": "Valkyrie",
+      "elixir": 4,
+      "rarity": "rare",
+      "type": "troop",
+      "arena": 2,
+      "roles": ["anti_swarm", "tank"]
+    },
+    {
+      "id": "26000012",
+      "name": "Skeleton Army",
+      "elixir": 3,
+      "rarity": "epic",
+      "type": "troop",
+      "arena": 0,
+      "roles": ["tank_killer", "swarm"]
+    },
+    {
+      "id": "26000013",
+      "name": "Bomber",
+      "elixir": 2,
+      "rarity": "common",
+      "type": "troop",
+      "arena": 0,
+      "roles": ["anti_swarm", "support"]
+    },
+    {
+      "id": "26000014",
+      "name": "Musketeer",
+      "elixir": 4,
+      "rarity": "rare",
+      "type": "troop",
+      "arena": 0,
+      "roles": ["air_targeting", "tank_killer", "support"]
+    },
+    {
+      "id": "26000015",
+      "name": "Baby Dragon",
+      "elixir": 4,
+      "rarity": "epic",
+      "type": "troop",
+      "arena": 0,
+      "roles": ["air_targeting", "anti_swarm", "support"]
+    },
+    {
+      "id": "26000016",
+      "name": "Prince",
+      "elixir": 5,
+      "rarity": "epic",
+      "type": "troop",
+      "arena": 0,
+      "roles": ["win_condition", "tank_killer"]
+    },
+    {
+      "id": "26000017",
+      "name": "Wizard",
+      "elixir": 5,
+      "rarity": "rare",
+      "type": "troop",
+      "arena": 5,
+      "roles": ["air_targeting", "anti_swarm", "support"]
+    },
+    {
+      "id": "26000018",
+      "name": "Mini P.E.K.K.A",
+      "elixir": 4,
+      "rarity": "rare",
+      "type": "troop",
+      "arena": 0,
+      "roles": ["tank_killer"]
+    },
+    {
+      "id": "26000019",
+      "name": "Spear Goblins",
+      "elixir": 2,
+      "rarity": "common",
+      "type": "troop",
+      "arena": 1,
+      "roles": ["air_targeting", "cycle", "swarm"]
+    },
+    {
+      "id": "26000020",
+      "name": "Giant Skeleton",
+      "elixir": 6,
+      "rarity": "epic",
+      "type": "troop",
+      "arena": 2,
+      "roles": ["tank", "anti_swarm"]
+    },
+    {
+      "id": "26000021",
+      "name": "Hog Rider",
+      "elixir": 4,
+      "rarity": "rare",
+      "type": "troop",
+      "arena": 4,
+      "roles": ["win_condition"]
+    },
+    {
+      "id": "26000022",
+      "name": "Minion Horde",
+      "elixir": 5,
+      "rarity": "common",
+      "type": "troop",
+      "arena": 4,
+      "roles": ["air_targeting", "swarm", "tank_killer"]
+    },
+    {
+      "id": "26000023",
+      "name": "Ice Wizard",
+      "elixir": 3,
+      "rarity": "legendary",
+      "type": "troop",
+      "arena": 5,
+      "roles": ["air_targeting", "support"]
+    },
+    {
+      "id": "26000024",
+      "name": "Royal Giant",
+      "elixir": 6,
+      "rarity": "common",
+      "type": "troop",
+      "arena": 7,
+      "roles": ["win_condition", "tank"]
+    },
+    {
+      "id": "26000025",
+      "name": "Guards",
+      "elixir": 3,
+      "rarity": "epic",
+      "type": "troop",
+      "arena": 7,
+      "roles": ["tank_killer", "swarm"]
+    },
+    {
+      "id": "26000026",
+      "name": "Princess",
+      "elixir": 3,
+      "rarity": "legendary",
+      "type": "troop",
+      "arena": 7,
+      "roles": ["air_targeting", "support", "anti_swarm"]
+    },
+    {
+      "id": "26000027",
+      "name": "Dark Prince",
+      "elixir": 4,
+      "rarity": "epic",
+      "type": "troop",
+      "arena": 7,
+      "roles": ["anti_swarm", "support"]
+    },
+    {
+      "id": "26000028",
+      "name": "Three Musketeers",
+      "elixir": 9,
+      "rarity": "rare",
+      "type": "troop",
+      "arena": 7,
+      "roles": ["win_condition", "air_targeting", "tank_killer"]
+    },
+    {
+      "id": "26000029",
+      "name": "Lava Hound",
+      "elixir": 7,
+      "rarity": "legendary",
+      "type": "troop",
+      "arena": 4,
+      "roles": ["win_condition", "tank"]
+    },
+    {
+      "id": "26000030",
+      "name": "Ice Spirit",
+      "elixir": 1,
+      "rarity": "common",
+      "type": "troop",
+      "arena": 8,
+      "roles": ["cycle"]
+    },
+    {
+      "id": "26000031",
+      "name": "Fire Spirit",
+      "elixir": 1,
+      "rarity": "common",
+      "type": "troop",
+      "arena": 0,
+      "roles": ["cycle", "anti_swarm"]
+    },
+    {
+      "id": "26000032",
+      "name": "Miner",
+      "elixir": 3,
+      "rarity": "legendary",
+      "type": "troop",
+      "arena": 0,
+      "roles": ["win_condition", "cycle"]
+    },
+    {
+      "id": "26000033",
+      "name": "Sparky",
+      "elixir": 6,
+      "rarity": "legendary",
+      "type": "troop",
+      "arena": 6,
+      "roles": ["tank_killer"]
+    },
+    {
+      "id": "26000034",
+      "name": "Bowler",
+      "elixir": 5,
+      "rarity": "epic",
+      "type": "troop",
+      "arena": 8,
+      "roles": ["anti_swarm", "support"]
+    },
+    {
+      "id": "26000035",
+      "name": "Lumberjack",
+      "elixir": 4,
+      "rarity": "legendary",
+      "type": "troop",
+      "arena": 8,
+      "roles": ["tank_killer"]
+    },
+    {
+      "id": "26000036",
+      "name": "Battle Ram",
+      "elixir": 4,
+      "rarity": "rare",
+      "type": "troop",
+      "arena": 3,
+      "roles": ["win_condition"]
+    },
+    {
+      "id": "26000037",
+      "name": "Inferno Dragon",
+      "elixir": 4,
+      "rarity": "legendary",
+      "type": "troop",
+      "arena": 4,
+      "roles": ["tank_killer", "air_targeting"]
+    },
+    {
+      "id": "26000038",
+      "name": "Ice Golem",
+      "elixir": 2,
+      "rarity": "rare",
+      "type": "troop",
+      "arena": 8,
+      "roles": ["tank", "cycle"]
+    },
+    {
+      "id": "26000039",
+      "name": "Mega Minion",
+      "elixir": 3,
+      "rarity": "rare",
+      "type": "troop",
+      "arena": 4,
+      "roles": ["air_targeting", "tank_killer"]
+    },
+    {
+      "id": "26000040",
+      "name": "Dart Goblin",
+      "elixir": 3,
+      "rarity": "rare",
+      "type": "troop",
+      "arena": 9,
+      "roles": ["air_targeting", "support"]
+    },
+    {
+      "id": "26000041",
+      "name": "Goblin Gang",
+      "elixir": 3,
+      "rarity": "common",
+      "type": "troop",
+      "arena": 9,
+      "roles": ["air_targeting", "swarm"]
+    },
+    {
+      "id": "26000042",
+      "name": "Electro Wizard",
+      "elixir": 4,
+      "rarity": "legendary",
+      "type": "troop",
+      "arena": 7,
+      "roles": ["air_targeting", "support"]
+    },
+    {
+      "id": "26000043",
+      "name": "Elite Barbarians",
+      "elixir": 6,
+      "rarity": "common",
+      "type": "troop",
+      "arena": 10,
+      "roles": ["win_condition", "tank_killer"]
+    },
+    {
+      "id": "26000044",
+      "name": "Hunter",
+      "elixir": 4,
+      "rarity": "epic",
+      "type": "troop",
+      "arena": 2,
+      "roles": ["air_targeting", "tank_killer"]
+    },
+    {
+      "id": "26000045",
+      "name": "Executioner",
+      "elixir": 5,
+      "rarity": "epic",
+      "type": "troop",
+      "arena": 9,
+      "roles": ["air_targeting", "anti_swarm"]
+    },
+    {
+      "id": "26000046",
+      "name": "Bandit",
+      "elixir": 3,
+      "rarity": "legendary",
+      "type": "troop",
+      "arena": 0,
+      "roles": ["win_condition", "support"]
+    },
+    {
+      "id": "26000047",
+      "name": "Royal Recruits",
+      "elixir": 7,
+      "rarity": "common",
+      "type": "troop",
+      "arena": 7,
+      "roles": ["swarm", "support"]
+    },
+    {
+      "id": "26000048",
+      "name": "Night Witch",
+      "elixir": 4,
+      "rarity": "legendary",
+      "type": "troop",
+      "arena": 0,
+      "roles": ["air_targeting", "support"]
+    },
+    {
+      "id": "26000049",
+      "name": "Bats",
+      "elixir": 2,
+      "rarity": "common",
+      "type": "troop",
+      "arena": 0,
+      "roles": ["air_targeting", "cycle", "swarm"]
+    },
+    {
+      "id": "26000050",
+      "name": "Royal Ghost",
+      "elixir": 3,
+      "rarity": "legendary",
+      "type": "troop",
+      "arena": 0,
+      "roles": ["anti_swarm", "support"]
+    },
+    {
+      "id": "26000051",
+      "name": "Ram Rider",
+      "elixir": 5,
+      "rarity": "legendary",
+      "type": "troop",
+      "arena": 0,
+      "roles": ["win_condition"]
+    },
+    {
+      "id": "26000052",
+      "name": "Zappies",
+      "elixir": 4,
+      "rarity": "rare",
+      "type": "troop",
+      "arena": 11,
+      "roles": ["support"]
+    },
+    {
+      "id": "26000053",
+      "name": "Rascals",
+      "elixir": 5,
+      "rarity": "common",
+      "type": "troop",
+      "arena": 13,
+      "roles": ["air_targeting", "support"]
+    },
+    {
+      "id": "26000054",
+      "name": "Cannon Cart",
+      "elixir": 5,
+      "rarity": "epic",
+      "type": "troop",
+      "arena": 10,
+      "roles": ["support"]
+    },
+    {
+      "id": "26000055",
+      "name": "Mega Knight",
+      "elixir": 7,
+      "rarity": "legendary",
+      "type": "troop",
+      "arena": 7,
+      "roles": ["anti_swarm", "tank"]
+    },
+    {
+      "id": "26000056",
+      "name": "Skeleton Barrel",
+      "elixir": 3,
+      "rarity": "common",
+      "type": "troop",
+      "arena": 6,
+      "roles": ["win_condition", "swarm"]
+    },
+    {
+      "id": "26000057",
+      "name": "Flying Machine",
+      "elixir": 4,
+      "rarity": "rare",
+      "type": "troop",
+      "arena": 6,
+      "roles": ["air_targeting", "support"]
+    },
+    {
+      "id": "26000058",
+      "name": "Wall Breakers",
+      "elixir": 2,
+      "rarity": "epic",
+      "type": "troop",
+      "arena": 0,
+      "roles": ["win_condition", "cycle"]
+    },
+    {
+      "id": "26000059",
+      "name": "Royal Hogs",
+      "elixir": 5,
+      "rarity": "rare",
+      "type": "troop",
+      "arena": 10,
+      "roles": ["win_condition", "swarm"]
+    },
+    {
+      "id": "26000060",
+      "name": "Goblin Giant",
+      "elixir": 6,
+      "rarity": "epic",
+      "type": "troop",
+      "arena": 9,
+      "roles": ["win_condition", "tank", "air_targeting"]
+    },
+    {
+      "id": "26000061",
+      "name": "Fisherman",
+      "elixir": 3,
+      "rarity": "legendary",
+      "type": "troop",
+      "arena": 0,
+      "roles": ["support"]
+    },
+    {
+      "id": "26000062",
+      "name": "Magic Archer",
+      "elixir": 4,
+      "rarity": "legendary",
+      "type": "troop",
+      "arena": 0,
+      "roles": ["air_targeting", "support"]
+    },
+    {
+      "id": "26000063",
+      "name": "Electro Dragon",
+      "elixir": 5,
+      "rarity": "epic",
+      "type": "troop",
+      "arena": 11,
+      "roles": ["air_targeting", "support"]
+    },
+    {
+      "id": "26000064",
+      "name": "Firecracker",
+      "elixir": 3,
+      "rarity": "common",
+      "type": "troop",
+      "arena": 5,
+      "roles": ["air_targeting", "anti_swarm"]
+    },
+    {
+      "id": "26000065",
+      "name": "Mighty Miner",
+      "elixir": 4,
+      "rarity": "champion",
+      "type": "troop",
+      "arena": 15,
+      "roles": ["tank_killer"]
+    },
+    {
+      "id": "26000067",
+      "name": "Elixir Golem",
+      "elixir": 3,
+      "rarity": "rare",
+      "type": "troop",
+      "arena": 11,
+      "roles": ["win_condition", "tank"]
+    },
+    {
+      "id": "26000068",
+      "name": "Battle Healer",
+      "elixir": 4,
+      "rarity": "rare",
+      "type": "troop",
+      "arena": 12,
+      "roles": ["support", "tank"]
+    },
+    {
+      "id": "26000072",
+      "name": "Skeleton King",
+      "elixir": 4,
+      "rarity": "champion",
+      "type": "troop",
+      "arena": 15,
+      "roles": ["tank", "anti_swarm"]
+    },
+    {
+      "id": "26000080",
+      "name": "Electro Spirit",
+      "elixir": 1,
+      "rarity": "common",
+      "type": "troop",
+      "arena": 11,
+      "roles": ["cycle"]
+    },
+    {
+      "id": "26000083",
+      "name": "Electro Giant",
+      "elixir": 7,
+      "rarity": "epic",
+      "type": "troop",
+      "arena": 14,
+      "roles": ["win_condition", "tank"]
+    },
+    {
+      "id": "26000084",
+      "name": "Mother Witch",
+      "elixir": 4,
+      "rarity": "legendary",
+      "type": "troop",
+      "arena": 0,
+      "roles": ["anti_swarm", "support"]
+    },
+    {
+      "id": "26000085",
+      "name": "Golden Knight",
+      "elixir": 4,
+      "rarity": "champion",
+      "type": "troop",
+      "arena": 15,
+      "roles": ["win_condition", "anti_swarm"]
+    },
+    {
+      "id": "26000086",
+      "name": "Archer Queen",
+      "elixir": 5,
+      "rarity": "champion",
+      "type": "troop",
+      "arena": 15,
+      "roles": ["air_targeting", "tank_killer"]
+    },
+    {
+      "id": "26000087",
+      "name": "Phoenix",
+      "elixir": 4,
+      "rarity": "legendary",
+      "type": "troop",
+      "arena": 0,
+      "roles": ["air_targeting", "support"]
+    },
+    {
+      "id": "26000088",
+      "name": "Monk",
+      "elixir": 5,
+      "rarity": "champion",
+      "type": "troop",
+      "arena": 15,
+      "roles": ["tank_killer"]
+    },
+    {
+      "id": "27000000",
+      "name": "Cannon",
+      "elixir": 3,
+      "rarity": "common",
+      "type": "building",
+      "arena": 3,
+      "roles": ["tank_killer"]
+    },
+    {
+      "id": "27000001",
+      "name": "Goblin Hut",
+      "elixir": 5,
+      "rarity": "rare",
+      "type": "building",
+      "arena": 1,
+      "roles": ["air_targeting", "support"]
+    },
+    {
+      "id": "27000002",
+      "name": "Mortar",
+      "elixir": 4,
+      "rarity": "common",
+      "type": "building",
+      "arena": 6,
+      "roles": ["win_condition"]
+    },
+    {
+      "id": "27000003",
+      "name": "Inferno Tower",
+      "elixir": 5,
+      "rarity": "rare",
+      "type": "building",
+      "arena": 4,
+      "roles": ["tank_killer", "air_targeting"]
+    },
+    {
+      "id": "27000004",
+      "name": "Bomb Tower",
+      "elixir": 4,
+      "rarity": "rare",
+      "type": "building",
+      "arena": 2,
+      "roles": ["anti_swarm"]
+    },
+    {
+      "id": "27000005",
+      "name": "Barbarian Hut",
+      "elixir": 6,
+      "rarity": "rare",
+      "type": "building",
+      "arena": 3,
+      "roles": ["support"]
+    },
+    {
+      "id": "27000006",
+      "name": "Tesla",
+      "elixir": 4,
+      "rarity": "common",
+      "type": "building",
+      "arena": 4,
+      "roles": ["air_targeting", "tank_killer"]
+    },
+    {
+      "id": "27000007",
+      "name": "Elixir Collector",
+      "elixir": 6,
+      "rarity": "rare",
+      "type": "building",
+      "arena": 8,
+      "roles": ["support"]
+    },
+    {
+      "id": "27000008",
+      "name": "X-Bow",
+      "elixir": 6,
+      "rarity": "epic",
+      "type": "building",
+      "arena": 3,
+      "roles": ["win_condition"]
+    },
+    {
+      "id": "27000009",
+      "name": "Tombstone",
+      "elixir": 3,
+      "rarity": "rare",
+      "type": "building",
+      "arena": 2,
+      "roles": ["tank_killer", "swarm"]
+    },
+    {
+      "id": "27000010",
+      "name": "Furnace",
+      "elixir": 4,
+      "rarity": "rare",
+      "type": "building",
+      "arena": 5,
+      "roles": ["support"]
+    },
+    {
+      "id": "27000012",
+      "name": "Goblin Cage",
+      "elixir": 4,
+      "rarity": "rare",
+      "type": "building",
+      "arena": 3,
+      "roles": ["tank_killer"]
+    },
+    {
+      "id": "27000013",
+      "name": "Goblin Drill",
+      "elixir": 4,
+      "rarity": "epic",
+      "type": "building",
+      "arena": 14,
+      "roles": ["win_condition", "swarm"]
+    },
+    {
+      "id": "28000000",
+      "name": "Fireball",
+      "elixir": 4,
+      "rarity": "rare",
+      "type": "spell",
+      "arena": 0,
+      "roles": ["big_spell"]
+    },
+    {
+      "id": "28000001",
+      "name": "Arrows",
+      "elixir": 3,
+      "rarity": "common",
+      "type": "spell",
+      "arena": 0,
+      "roles": ["small_spell", "anti_swarm"]
+    },
+    {
+      "id": "28000002",
+      "name": "Rage",
+      "elixir": 2,
+      "rarity": "epic",
+      "type": "spell",
+      "arena": 3,
+      "roles": ["small_spell", "support"]
+    },
+    {
+      "id": "28000003",
+      "name": "Rocket",
+      "elixir": 6,
+      "rarity": "rare",
+      "type": "spell",
+      "arena": 6,
+      "roles": ["big_spell"]
+    },
+    {
+      "id": "28000004",
+      "name": "Goblin Barrel",
+      "elixir": 3,
+      "rarity": "epic",
+      "type": "spell",
+      "arena": 1,
+      "roles": ["win_condition", "swarm"]
+    },
+    {
+      "id": "28000005",
+      "name": "Freeze",
+      "elixir": 4,
+      "rarity": "epic",
+      "type": "spell",
+      "arena": 4,
+      "roles": ["big_spell"]
+    },
+    {
+      "id": "28000006",
+      "name": "Mirror",
+      "elixir": 1,
+      "rarity": "epic",
+      "type": "spell",
+      "arena": 5,
+      "roles": ["support"]
+    },
+    {
+      "id": "28000007",
+      "name": "Lightning",
+      "elixir": 6,
+      "rarity": "epic",
+      "type": "spell",
+      "arena": 1,
+      "roles": ["big_spell"]
+    },
+    {
+      "id": "28000008",
+      "name": "Zap",
+      "elixir": 2,
+      "rarity": "common",
+      "type": "spell",
+      "arena": 0,
+      "roles": ["small_spell", "cycle"]
+    },
+    {
+      "id": "28000009",
+      "name": "Poison",
+      "elixir": 4,
+      "rarity": "epic",
+      "type": "spell",
+      "arena": 5,
+      "roles": ["big_spell"]
+    },
+    {
+      "id": "28000010",
+      "name": "Graveyard",
+      "elixir": 5,
+      "rarity": "legendary",
+      "type": "spell",
+      "arena": 5,
+      "roles": ["win_condition"]
+    },
+    {
+      "id": "28000011",
+      "name": "The Log",
+      "elixir": 2,
+      "rarity": "legendary",
+      "type": "spell",
+      "arena": 6,
+      "roles": ["small_spell", "anti_swarm"]
+    },
+    {
+      "id": "28000012",
+      "name": "Tornado",
+      "elixir": 3,
+      "rarity": "epic",
+      "type": "spell",
+      "arena": 6,
+      "roles": ["small_spell"]
+    },
+    {
+      "id": "28000013",
+      "name": "Clone",
+      "elixir": 3,
+      "rarity": "epic",
+      "type": "spell",
+      "arena": 8,
+      "roles": ["support"]
+    },
+    {
+      "id": "28000014",
+      "name": "Earthquake",
+      "elixir": 3,
+      "rarity": "rare",
+      "type": "spell",
+      "arena": 9,
+      "roles": ["small_spell"]
+    },
+    {
+      "id": "28000015",
+      "name": "Barbarian Barrel",
+      "elixir": 2,
+      "rarity": "epic",
+      "type": "spell",
+      "arena": 3,
+      "roles": ["small_spell", "anti_swarm"]
+    },
+    {
+      "id": "28000016",
+      "name": "Heal Spirit",
+      "elixir": 1,
+      "rarity": "rare",
+      "type": "spell",
+      "arena": 7,
+      "roles": ["cycle"]
+    },
+    {
+      "id": "28000017",
+      "name": "Giant Snowball",
+      "elixir": 2,
+      "rarity": "common",
+      "type": "spell",
+      "arena": 8,
+      "roles": ["small_spell", "cycle"]
+    },
+    {
+      "id": "28000018",
+      "name": "Royal Delivery",
+      "elixir": 3,
+      "rarity": "common",
+      "type": "spell",
+      "arena": 13,
+      "roles": ["small_spell", "anti_swarm"]
+    }
+  ]
+}

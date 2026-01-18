@@ -1,0 +1,30 @@
+{
+  "arenas": [
+    { "id": 0, "name": "Training Camp", "trophyMin": 0, "trophyMax": 0 },
+    { "id": 1, "name": "Goblin Stadium", "trophyMin": 0, "trophyMax": 299 },
+    { "id": 2, "name": "Bone Pit", "trophyMin": 300, "trophyMax": 599 },
+    { "id": 3, "name": "Barbarian Bowl", "trophyMin": 600, "trophyMax": 999 },
+    { "id": 4, "name": "P.E.K.K.A's Playhouse", "trophyMin": 1000, "trophyMax": 1299 },
+    { "id": 5, "name": "Spell Valley", "trophyMin": 1300, "trophyMax": 1599 },
+    { "id": 6, "name": "Builder's Workshop", "trophyMin": 1600, "trophyMax": 1999 },
+    { "id": 7, "name": "Royal Arena", "trophyMin": 2000, "trophyMax": 2299 },
+    { "id": 8, "name": "Frozen Peak", "trophyMin": 2300, "trophyMax": 2599 },
+    { "id": 9, "name": "Jungle Arena", "trophyMin": 2600, "trophyMax": 2999 },
+    { "id": 10, "name": "Hog Mountain", "trophyMin": 3000, "trophyMax": 3299 },
+    { "id": 11, "name": "Electro Valley", "trophyMin": 3300, "trophyMax": 3599 },
+    { "id": 12, "name": "Spooky Town", "trophyMin": 3600, "trophyMax": 3999 },
+    { "id": 13, "name": "Rascal's Hideout", "trophyMin": 4000, "trophyMax": 4299 },
+    { "id": 14, "name": "Serenity Peak", "trophyMin": 4300, "trophyMax": 4599 },
+    { "id": 15, "name": "Legendary Arena", "trophyMin": 4600, "trophyMax": 4999 },
+    { "id": 16, "name": "Challenger I", "trophyMin": 5000, "trophyMax": 5299 },
+    { "id": 17, "name": "Challenger II", "trophyMin": 5300, "trophyMax": 5599 },
+    { "id": 18, "name": "Challenger III", "trophyMin": 5600, "trophyMax": 5999 },
+    { "id": 19, "name": "Master I", "trophyMin": 6000, "trophyMax": 6299 },
+    { "id": 20, "name": "Master II", "trophyMin": 6300, "trophyMax": 6599 },
+    { "id": 21, "name": "Master III", "trophyMin": 6600, "trophyMax": 6999 },
+    { "id": 22, "name": "Champion", "trophyMin": 7000, "trophyMax": 7299 },
+    { "id": 23, "name": "Grand Champion", "trophyMin": 7300, "trophyMax": 7599 },
+    { "id": 24, "name": "Royal Champion", "trophyMin": 7600, "trophyMax": 7999 },
+    { "id": 25, "name": "Ultimate Champion", "trophyMin": 8000, "trophyMax": 99999 }
+  ]
+}
