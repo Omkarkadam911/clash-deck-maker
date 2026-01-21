@@ -83,3 +83,45 @@ export interface AppSettings {
   theme: 'light' | 'dark' | 'system';
   apiUrl: string;
 }
+
+// Optimization types
+export interface OptimizeRequest {
+  deck: string[];
+  maxSwaps?: number;
+  playerCardLevels?: PlayerCardLevel[];
+}
+
+export interface SwapPlan {
+  remove: { cardId: string; cardName: string };
+  add: { cardId: string; cardName: string };
+  reason: string;
+  scoreDelta: number;
+}
+
+export interface DeckScores {
+  overall: number;
+  coverage: number;
+  curve: number;
+  role: number;
+  levelFit: number;
+}
+
+export interface OptimizeResponse {
+  originalDeck: string[];
+  optimizedDeck: string[];
+  swapPlan: SwapPlan[];
+  scores: {
+    before: DeckScores;
+    after: DeckScores;
+    improvement: number;
+  };
+  analysis: {
+    missingRoles: CardRole[];
+    averageElixir: {
+      before: number;
+      after: number;
+    };
+    isOptimal: boolean;
+  };
+  cardDetails: Card[];
+}

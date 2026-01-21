@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import { Card, Arena, TopDeck, AppSettings, AutofillResponse } from '../types';
+import { Card, Arena, TopDeck, AppSettings, AutofillResponse, OptimizeResponse } from '../types';
 import api from '../services/api';
 
 interface DeckBuilderState {
@@ -11,6 +11,7 @@ interface DeckBuilderState {
   // Deck builder
   currentDeck: Card[];
   lastAutofillResult: AutofillResponse | null;
+  lastOptimizeResult: OptimizeResponse | null;
 
   // Settings
   settings: AppSettings;
@@ -20,6 +21,7 @@ interface DeckBuilderState {
   isLoadingArenas: boolean;
   isLoadingTopDecks: boolean;
   isAutofilling: boolean;
+  isOptimizing: boolean;
 
   // Error states
   error: string | null;
@@ -35,6 +37,8 @@ interface DeckBuilderState {
   setDeck: (cards: Card[]) => void;
 
   autofillDeck: () => Promise<void>;
+  optimizeDeck: (maxSwaps?: number) => Promise<void>;
+  applyOptimization: () => void;
   importDeckFromLink: (link: string) => Promise<void>;
 
   updateSettings: (settings: Partial<AppSettings>) => void;
@@ -54,11 +58,13 @@ export const useStore = create<DeckBuilderState>((set, get) => ({
   topDecks: [],
   currentDeck: [],
   lastAutofillResult: null,
+  lastOptimizeResult: null,
   settings: DEFAULT_SETTINGS,
   isLoadingCards: false,
   isLoadingArenas: false,
   isLoadingTopDecks: false,
   isAutofilling: false,
+  isOptimizing: false,
   error: null,
 
   // Load cards from API
@@ -117,11 +123,11 @@ export const useStore = create<DeckBuilderState>((set, get) => ({
   },
 
   clearDeck: () => {
-    set({ currentDeck: [], lastAutofillResult: null });
+    set({ currentDeck: [], lastAutofillResult: null, lastOptimizeResult: null });
   },
 
   setDeck: (cards: Card[]) => {
-    set({ currentDeck: cards.slice(0, 8), lastAutofillResult: null });
+    set({ currentDeck: cards.slice(0, 8), lastAutofillResult: null, lastOptimizeResult: null });
   },
 
   // Autofill deck
@@ -150,6 +156,52 @@ export const useStore = create<DeckBuilderState>((set, get) => ({
       set({
         error: error instanceof Error ? error.message : 'Failed to autofill deck',
         isAutofilling: false,
+      });
+    }
+  },
+
+  // Optimize deck
+  optimizeDeck: async (maxSwaps: number = 3) => {
+    const { currentDeck, cards } = get();
+    if (currentDeck.length !== 8) {
+      set({ error: 'Deck must have 8 cards to optimize' });
+      return;
+    }
+
+    set({ isOptimizing: true, error: null, lastOptimizeResult: null });
+    try {
+      const result = await api.optimizeDeck({
+        deck: currentDeck.map((c) => c.id),
+        maxSwaps,
+      });
+
+      set({
+        lastOptimizeResult: result,
+        isOptimizing: false,
+      });
+    } catch (error) {
+      set({
+        error: error instanceof Error ? error.message : 'Failed to optimize deck',
+        isOptimizing: false,
+      });
+    }
+  },
+
+  // Apply optimization result to current deck
+  applyOptimization: () => {
+    const { lastOptimizeResult, cards } = get();
+    if (!lastOptimizeResult) return;
+
+    // Convert optimized deck IDs to Card objects
+    const optimizedDeck = lastOptimizeResult.optimizedDeck
+      .map((id) => cards.find((c) => c.id === id) || lastOptimizeResult.cardDetails?.find((c) => c.id === id))
+      .filter((c): c is Card => c !== undefined);
+
+    if (optimizedDeck.length === 8) {
+      set({
+        currentDeck: optimizedDeck,
+        lastOptimizeResult: null,
+        lastAutofillResult: null,
       });
     }
   },

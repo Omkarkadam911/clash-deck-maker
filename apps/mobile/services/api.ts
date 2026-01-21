@@ -1,4 +1,4 @@
-import { Card, Arena, TopDeck, AutofillRequest, AutofillResponse } from '../types';
+import { Card, Arena, TopDeck, AutofillRequest, AutofillResponse, OptimizeRequest, OptimizeResponse } from '../types';
 
 // Use localhost for development - update for production
 const API_BASE_URL = __DEV__
@@ -99,6 +99,13 @@ class ApiService {
   }> {
     const encodedLink = encodeURIComponent(link);
     return this.fetch(`/deck/parse?link=${encodedLink}`);
+  }
+
+  async optimizeDeck(request: OptimizeRequest): Promise<OptimizeResponse> {
+    return this.fetch<OptimizeResponse>('/deck/optimize', {
+      method: 'POST',
+      body: JSON.stringify(request),
+    });
   }
 }
 

@@ -15,7 +15,7 @@ import {
 import { Ionicons } from '@expo/vector-icons';
 import * as Clipboard from 'expo-clipboard';
 import { useStore, selectDeckAverageElixir, selectDeckShareLink } from '../../store';
-import { Card, CardType, CardRarity } from '../../types';
+import { Card, CardType, CardRarity, SwapPlan } from '../../types';
 
 type FilterType = 'all' | CardType;
 type FilterRarity = 'all' | CardRarity;
@@ -24,7 +24,9 @@ export default function DeckBuilderScreen() {
   const cards = useStore((state) => state.cards);
   const currentDeck = useStore((state) => state.currentDeck);
   const isAutofilling = useStore((state) => state.isAutofilling);
+  const isOptimizing = useStore((state) => state.isOptimizing);
   const lastAutofillResult = useStore((state) => state.lastAutofillResult);
+  const lastOptimizeResult = useStore((state) => state.lastOptimizeResult);
   const error = useStore((state) => state.error);
   const settings = useStore((state) => state.settings);
 
@@ -32,6 +34,8 @@ export default function DeckBuilderScreen() {
   const removeCardFromDeck = useStore((state) => state.removeCardFromDeck);
   const clearDeck = useStore((state) => state.clearDeck);
   const autofillDeck = useStore((state) => state.autofillDeck);
+  const optimizeDeck = useStore((state) => state.optimizeDeck);
+  const applyOptimization = useStore((state) => state.applyOptimization);
   const importDeckFromLink = useStore((state) => state.importDeckFromLink);
   const clearError = useStore((state) => state.clearError);
 
@@ -40,6 +44,7 @@ export default function DeckBuilderScreen() {
 
   const [isCardPickerVisible, setCardPickerVisible] = useState(false);
   const [isImportModalVisible, setImportModalVisible] = useState(false);
+  const [isOptimizeModalVisible, setOptimizeModalVisible] = useState(false);
   const [importLink, setImportLink] = useState('');
   const [filterType, setFilterType] = useState<FilterType>('all');
   const [filterRarity, setFilterRarity] = useState<FilterRarity>('all');
@@ -85,6 +90,20 @@ export default function DeckBuilderScreen() {
       return;
     }
     await autofillDeck();
+  };
+
+  const handleOptimize = async () => {
+    if (currentDeck.length !== 8) {
+      Alert.alert('Incomplete Deck', 'You need 8 cards to optimize');
+      return;
+    }
+    await optimizeDeck();
+    setOptimizeModalVisible(true);
+  };
+
+  const handleApplyOptimization = () => {
+    applyOptimization();
+    setOptimizeModalVisible(false);
   };
 
   const handleImport = async () => {
@@ -209,15 +228,30 @@ export default function DeckBuilderScreen() {
             </TouchableOpacity>
 
             <TouchableOpacity
+              style={[styles.actionButton, styles.optimizeButton]}
+              onPress={handleOptimize}
+              disabled={isOptimizing || currentDeck.length !== 8}
+            >
+              {isOptimizing ? (
+                <ActivityIndicator color="#fff" size="small" />
+              ) : (
+                <>
+                  <Ionicons name="trending-up" size={20} color="#fff" />
+                  <Text style={styles.actionButtonText}>Optimize</Text>
+                </>
+              )}
+            </TouchableOpacity>
+          </View>
+
+          <View style={styles.actionsRow}>
+            <TouchableOpacity
               style={[styles.actionButton, styles.importButton]}
               onPress={() => setImportModalVisible(true)}
             >
               <Ionicons name="download" size={20} color="#fff" />
               <Text style={styles.actionButtonText}>Import</Text>
             </TouchableOpacity>
-          </View>
 
-          <View style={styles.actionsRow}>
             <TouchableOpacity
               style={[styles.actionButton, styles.exportButton]}
               onPress={handleExport}
@@ -226,7 +260,9 @@ export default function DeckBuilderScreen() {
               <Ionicons name="share" size={20} color="#fff" />
               <Text style={styles.actionButtonText}>Export</Text>
             </TouchableOpacity>
+          </View>
 
+          <View style={styles.actionsRow}>
             <TouchableOpacity
               style={[styles.actionButton, styles.clearButton]}
               onPress={handleClearDeck}
@@ -390,6 +426,113 @@ export default function DeckBuilderScreen() {
             contentContainerStyle={styles.cardGrid}
             showsVerticalScrollIndicator={false}
           />
+        </View>
+      </Modal>
+
+      {/* Optimization Results Modal */}
+      <Modal
+        visible={isOptimizeModalVisible}
+        animationType="slide"
+        presentationStyle="pageSheet"
+        onRequestClose={() => setOptimizeModalVisible(false)}
+      >
+        <View style={styles.modalContainer}>
+          <View style={styles.modalHeader}>
+            <Text style={styles.modalTitle}>Optimization Results</Text>
+            <TouchableOpacity onPress={() => setOptimizeModalVisible(false)}>
+              <Ionicons name="close" size={28} color="#fff" />
+            </TouchableOpacity>
+          </View>
+
+          <ScrollView style={styles.optimizeContent}>
+            {lastOptimizeResult && (
+              <>
+                {/* Score Summary */}
+                <View style={styles.scoreSection}>
+                  <Text style={styles.scoreSectionTitle}>Deck Score</Text>
+                  <View style={styles.scoreRow}>
+                    <View style={styles.scoreBox}>
+                      <Text style={styles.scoreLabel}>Before</Text>
+                      <Text style={styles.scoreValue}>{lastOptimizeResult.scores.before.overall.toFixed(1)}</Text>
+                    </View>
+                    <View style={styles.scoreArrow}>
+                      <Ionicons name="arrow-forward" size={24} color="#4caf50" />
+                    </View>
+                    <View style={styles.scoreBox}>
+                      <Text style={styles.scoreLabel}>After</Text>
+                      <Text style={[styles.scoreValue, styles.scoreImproved]}>
+                        {lastOptimizeResult.scores.after.overall.toFixed(1)}
+                      </Text>
+                    </View>
+                  </View>
+                  {lastOptimizeResult.scores.improvement > 0 && (
+                    <Text style={styles.improvementText}>
+                      +{lastOptimizeResult.scores.improvement.toFixed(1)} improvement
+                    </Text>
+                  )}
+                </View>
+
+                {/* Swap Plan */}
+                {lastOptimizeResult.swapPlan.length > 0 ? (
+                  <View style={styles.swapSection}>
+                    <Text style={styles.scoreSectionTitle}>Suggested Swaps</Text>
+                    {lastOptimizeResult.swapPlan.map((swap, index) => (
+                      <View key={index} style={styles.swapItem}>
+                        <View style={styles.swapCards}>
+                          <View style={styles.swapCard}>
+                            <Text style={styles.swapCardLabel}>Remove</Text>
+                            <Text style={styles.swapCardName}>{swap.remove.cardName}</Text>
+                          </View>
+                          <Ionicons name="swap-horizontal" size={20} color="#e94560" />
+                          <View style={styles.swapCard}>
+                            <Text style={styles.swapCardLabel}>Add</Text>
+                            <Text style={[styles.swapCardName, styles.swapCardAdd]}>{swap.add.cardName}</Text>
+                          </View>
+                        </View>
+                        <Text style={styles.swapReason}>{swap.reason}</Text>
+                      </View>
+                    ))}
+                  </View>
+                ) : (
+                  <View style={styles.optimalSection}>
+                    <Ionicons name="checkmark-circle" size={48} color="#4caf50" />
+                    <Text style={styles.optimalText}>Your deck is already optimal!</Text>
+                    <Text style={styles.optimalSubtext}>No improvements suggested</Text>
+                  </View>
+                )}
+
+                {/* Analysis */}
+                <View style={styles.analysisSection}>
+                  <Text style={styles.scoreSectionTitle}>Analysis</Text>
+                  <View style={styles.analysisRow}>
+                    <Text style={styles.analysisLabel}>Avg Elixir:</Text>
+                    <Text style={styles.analysisValue}>
+                      {lastOptimizeResult.analysis.averageElixir.before} → {lastOptimizeResult.analysis.averageElixir.after}
+                    </Text>
+                  </View>
+                  {lastOptimizeResult.analysis.missingRoles.length > 0 && (
+                    <View style={styles.analysisRow}>
+                      <Text style={styles.analysisLabel}>Missing Roles:</Text>
+                      <Text style={styles.analysisValueWarning}>
+                        {lastOptimizeResult.analysis.missingRoles.map(r => r.replace('_', ' ')).join(', ')}
+                      </Text>
+                    </View>
+                  )}
+                </View>
+
+                {/* Apply Button */}
+                {lastOptimizeResult.swapPlan.length > 0 && (
+                  <TouchableOpacity
+                    style={styles.applyButton}
+                    onPress={handleApplyOptimization}
+                  >
+                    <Ionicons name="checkmark" size={20} color="#fff" />
+                    <Text style={styles.applyButtonText}>Apply Optimization</Text>
+                  </TouchableOpacity>
+                )}
+              </>
+            )}
+          </ScrollView>
         </View>
       </Modal>
 
@@ -559,6 +702,9 @@ const styles = StyleSheet.create({
   },
   clearButton: {
     backgroundColor: '#666',
+  },
+  optimizeButton: {
+    backgroundColor: '#ff9800',
   },
   actionButtonText: {
     color: '#fff',
@@ -743,6 +889,162 @@ const styles = StyleSheet.create({
   },
   confirmButtonText: {
     color: '#fff',
+    fontWeight: 'bold',
+  },
+  // Optimization Modal Styles
+  optimizeContent: {
+    flex: 1,
+    padding: 15,
+  },
+  scoreSection: {
+    backgroundColor: '#1a1a2e',
+    borderRadius: 12,
+    padding: 15,
+    marginBottom: 15,
+  },
+  scoreSectionTitle: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    color: '#fff',
+    marginBottom: 15,
+  },
+  scoreRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    gap: 15,
+  },
+  scoreBox: {
+    alignItems: 'center',
+    backgroundColor: '#0f3460',
+    padding: 15,
+    borderRadius: 8,
+    minWidth: 100,
+  },
+  scoreLabel: {
+    color: '#8b8b8b',
+    fontSize: 12,
+    marginBottom: 5,
+  },
+  scoreValue: {
+    color: '#fff',
+    fontSize: 28,
+    fontWeight: 'bold',
+  },
+  scoreImproved: {
+    color: '#4caf50',
+  },
+  scoreArrow: {
+    padding: 10,
+  },
+  improvementText: {
+    color: '#4caf50',
+    fontSize: 14,
+    fontWeight: 'bold',
+    textAlign: 'center',
+    marginTop: 10,
+  },
+  swapSection: {
+    backgroundColor: '#1a1a2e',
+    borderRadius: 12,
+    padding: 15,
+    marginBottom: 15,
+  },
+  swapItem: {
+    backgroundColor: '#0f3460',
+    borderRadius: 8,
+    padding: 12,
+    marginBottom: 10,
+  },
+  swapCards: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    marginBottom: 8,
+  },
+  swapCard: {
+    flex: 1,
+    alignItems: 'center',
+  },
+  swapCardLabel: {
+    color: '#8b8b8b',
+    fontSize: 11,
+    marginBottom: 4,
+  },
+  swapCardName: {
+    color: '#e94560',
+    fontSize: 13,
+    fontWeight: 'bold',
+    textAlign: 'center',
+  },
+  swapCardAdd: {
+    color: '#4caf50',
+  },
+  swapReason: {
+    color: '#ccc',
+    fontSize: 12,
+    fontStyle: 'italic',
+    textAlign: 'center',
+  },
+  optimalSection: {
+    backgroundColor: '#1a1a2e',
+    borderRadius: 12,
+    padding: 30,
+    marginBottom: 15,
+    alignItems: 'center',
+  },
+  optimalText: {
+    color: '#fff',
+    fontSize: 18,
+    fontWeight: 'bold',
+    marginTop: 15,
+  },
+  optimalSubtext: {
+    color: '#8b8b8b',
+    fontSize: 14,
+    marginTop: 5,
+  },
+  analysisSection: {
+    backgroundColor: '#1a1a2e',
+    borderRadius: 12,
+    padding: 15,
+    marginBottom: 15,
+  },
+  analysisRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    paddingVertical: 8,
+    borderBottomWidth: 1,
+    borderBottomColor: '#333',
+  },
+  analysisLabel: {
+    color: '#8b8b8b',
+    fontSize: 14,
+  },
+  analysisValue: {
+    color: '#fff',
+    fontSize: 14,
+    fontWeight: 'bold',
+  },
+  analysisValueWarning: {
+    color: '#ff9800',
+    fontSize: 14,
+    fontWeight: 'bold',
+  },
+  applyButton: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#4caf50',
+    padding: 15,
+    borderRadius: 8,
+    marginTop: 10,
+    marginBottom: 30,
+    gap: 10,
+  },
+  applyButtonText: {
+    color: '#fff',
+    fontSize: 16,
     fontWeight: 'bold',
   },
 });
