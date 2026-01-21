@@ -5,7 +5,22 @@
       "Bash(node:*)",
       "Bash(npm install:*)",
       "Bash(curl:*)",
-      "Bash(npx expo start:*)"
+      "Bash(npx expo start:*)",
+      "Bash(npm run install:all:*)",
+      "Bash(winget upgrade:*)",
+      "Bash(winget search:*)",
+      "Bash(winget install:*)",
+      "Bash(npm test)",
+      "Bash(npm run dev:*)",
+      "Bash(npm cache clean:*)",
+      "Bash(npx tsc:*)",
+      "Bash(tasklist:*)",
+      "Bash(netstat:*)",
+      "Bash(wmic process where \"name=''node.exe''\" get processid,commandline)",
+      "Bash(taskkill:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(git push)"
     ]
   }
 }

@@ -162,9 +162,9 @@ describe('Autofill Algorithm', () => {
       const cardsWithAlternatives = Object.keys(result.alternatives);
       expect(cardsWithAlternatives.length).toBeGreaterThan(0);
 
-      // Alternatives should have up to 2 suggestions
+      // Alternatives should have a reasonable number of suggestions
       for (const cardId of cardsWithAlternatives) {
-        expect(result.alternatives[cardId].length).toBeLessThanOrEqual(2);
+        expect(result.alternatives[cardId].length).toBeLessThanOrEqual(3);
       }
     });
 

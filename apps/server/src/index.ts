@@ -10,6 +10,11 @@ import {
   calculateAverageElixir,
 } from './data/loader';
 import { autofillDeck, validateDeck, AutofillRequest } from './autofill';
+import { scoreDeck, PlayerCardLevel } from './services/deckScoring';
+import { suggestCardSwaps } from './services/deckCandidates';
+
+// Environment variables (set via .env file locally or Render dashboard)
+const CLASH_ROYALE_API_KEY = process.env.CLASH_ROYALE_API_KEY;
 
 const app = express();
 const PORT = process.env.PORT || 3001;
@@ -147,6 +152,115 @@ app.post('/deck/validate', (req: Request, res: Response) => {
   }
 });
 
+// POST /deck/optimize - Optimize an existing deck
+app.post('/deck/optimize', (req: Request, res: Response) => {
+  try {
+    const { deck, maxSwaps = 3, playerCardLevels } = req.body as {
+      deck: string[];
+      maxSwaps?: number;
+      playerCardLevels?: PlayerCardLevel[];
+    };
+
+    // Validate request
+    if (!deck || !Array.isArray(deck)) {
+      res.status(400).json({ error: 'deck must be an array' });
+      return;
+    }
+
+    if (deck.length !== 8) {
+      res.status(400).json({ error: 'deck must have exactly 8 cards' });
+      return;
+    }
+
+    // Check for duplicates
+    const uniqueCards = new Set(deck);
+    if (uniqueCards.size !== deck.length) {
+      res.status(400).json({ error: 'deck contains duplicates' });
+      return;
+    }
+
+    // Validate all cards exist
+    const cardDetails = getCardsById(deck);
+    if (cardDetails.length !== 8) {
+      res.status(400).json({ error: 'deck contains invalid card IDs' });
+      return;
+    }
+
+    // Get current score
+    const currentScore = scoreDeck(deck, playerCardLevels);
+
+    // Get swap suggestions
+    const swapSuggestions = suggestCardSwaps(deck, {
+      playerLevels: playerCardLevels,
+    });
+
+    // Apply top swaps to create optimized deck
+    const swapsToApply = swapSuggestions.slice(0, maxSwaps);
+    let optimizedDeck = [...deck];
+    const swapPlan: Array<{
+      remove: { cardId: string; cardName: string };
+      add: { cardId: string; cardName: string };
+      reason: string;
+      scoreDelta: number;
+    }> = [];
+
+    for (const swap of swapsToApply) {
+      const removeIndex = optimizedDeck.indexOf(swap.removeCard);
+      if (removeIndex !== -1) {
+        const removeCard = getCardsById([swap.removeCard])[0];
+        const addCard = getCardsById([swap.addCard])[0];
+
+        optimizedDeck[removeIndex] = swap.addCard;
+        swapPlan.push({
+          remove: { cardId: swap.removeCard, cardName: removeCard?.name || 'Unknown' },
+          add: { cardId: swap.addCard, cardName: addCard?.name || 'Unknown' },
+          reason: swap.reason,
+          scoreDelta: swap.improvement,
+        });
+      }
+    }
+
+    // Get final score
+    const optimizedScore = scoreDeck(optimizedDeck, playerCardLevels);
+    const optimizedCardDetails = getCardsById(optimizedDeck);
+
+    res.json({
+      originalDeck: deck,
+      optimizedDeck,
+      swapPlan,
+      scores: {
+        before: {
+          overall: currentScore.overall,
+          coverage: currentScore.coverage.total,
+          curve: currentScore.curve.total,
+          role: currentScore.role.total,
+          levelFit: currentScore.levelFit.total,
+        },
+        after: {
+          overall: optimizedScore.overall,
+          coverage: optimizedScore.coverage.total,
+          curve: optimizedScore.curve.total,
+          role: optimizedScore.role.total,
+          levelFit: optimizedScore.levelFit.total,
+        },
+        improvement: optimizedScore.overall - currentScore.overall,
+      },
+      analysis: {
+        missingRoles: currentScore.coverage.missingRoles,
+        averageElixir: {
+          before: currentScore.curve.averageElixir,
+          after: optimizedScore.curve.averageElixir,
+        },
+        isOptimal: swapSuggestions.length === 0,
+      },
+      cardDetails: optimizedCardDetails,
+    });
+  } catch (error) {
+    console.error('Error optimizing deck:', error);
+    res.status(500).json({ error: 'Failed to optimize deck' });
+  }
+});
+
 // GET /deck/link/:deckLink - Parse a deck link
 app.get('/deck/parse', (req: Request, res: Response) => {
   try {
@@ -206,5 +320,9 @@ app.listen(PORT, () => {
   console.log('  GET  /meta/top-decks');
   console.log('  POST /deck/autofill');
   console.log('  POST /deck/validate');
+  console.log('  POST /deck/optimize');
   console.log('  GET  /deck/parse?link=...');
+  if (process.env.CLASH_ROYALE_API_KEY) {
+    console.log('  Clash Royale API: Configured ✓');
+  }
 });
